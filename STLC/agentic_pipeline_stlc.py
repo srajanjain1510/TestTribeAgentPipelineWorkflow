@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 from jira import JIRA
 from pydantic import BaseModel
 from langgraph.graph import StateGraph, START, END
-
+# pylint: disable=too-few-public-methods
 load_dotenv()
 # JIRA Authentication Configuration
 JIRA_SERVER = os.environ.get("JIRA_SERVER")
