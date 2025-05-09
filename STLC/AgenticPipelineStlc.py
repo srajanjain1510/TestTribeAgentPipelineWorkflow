@@ -1,12 +1,11 @@
 from __future__ import annotations
 
 import os
-
+from typing import List
 import requests
 from dotenv import load_dotenv
 from jira import JIRA
 from pydantic import BaseModel
-from typing import List
 from langgraph.graph import StateGraph, START, END
 
 load_dotenv()
