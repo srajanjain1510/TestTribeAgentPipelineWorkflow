@@ -1,3 +1,6 @@
+"""
+agentic_pipeline_stlc.py
+"""
 from __future__ import annotations
 
 import os
@@ -19,6 +22,9 @@ jira_client = JIRA(server=JIRA_SERVER, basic_auth=(JIRA_EMAIL, JIRA_API_TOKEN))
 
 # Define the schemas for each state
 class GraphState(BaseModel):
+    """
+    GraphState is a Pydantic model that defines the schema for the state of the pipeline.
+    """
     issue_key: str | None = None
     jira_story: JiraStory | None = None
     test_cases: List[str] | None = None
@@ -26,6 +32,9 @@ class GraphState(BaseModel):
 
 
 class JiraStory(BaseModel):
+    """
+    JiraStory is a Pydantic model that defines the schema for a JIRA user story.
+    """
     key: str
     summary: str
     description: str
@@ -38,6 +47,11 @@ graph = StateGraph(state_schema=GraphState)
 
 # Define the start state
 def start(data: GraphState):
+    """
+    Start state of the pipeline. This state initializes the pipeline and prepares for the next state.
+    :param data: The input data for the pipeline.
+    :return: issue_key: The JIRA issue key.
+    """
     # Use dot notation to access attributes
     issue_key = data.issue_key
     # Return a dictionary with the updated state
@@ -49,6 +63,11 @@ graph.add_node("start", start)
 
 # Define the fetch_jira_story state
 def fetch_story(data: GraphState):
+    """
+    Fetches the JIRA story from the JIRA server using the provided issue key.
+    :param data: input data for the pipeline.
+    :return: jira_story: The JIRA story object.
+    """
     issue_key = data.issue_key
     # Fetch the JIRA issue
     issue = jira_client.issue(issue_key)
@@ -75,6 +94,11 @@ graph.add_node("fetch_jira_story", fetch_story)
 
 # Define the generate_test_cases state
 def generate_cases(data: GraphState):
+    """
+    Generates test cases for the JIRA story using the LLaMA model.
+    :param data: input data for the pipeline.
+    :return: generated test cases.
+    """
     jira_story = data.jira_story
 
     # Prepare the input prompt for the LLaMA model
@@ -119,6 +143,11 @@ graph.add_node("generate_test_cases", generate_cases)
 
 # Define the update_jira_with_test_cases state
 def update_jira(data: GraphState):
+    """
+    Updates the JIRA issue with the generated test cases.
+    :param data: input data for the pipeline.
+    :return: update status.
+    """
     issue_key = data.issue_key
     test_cases = data.test_cases
 

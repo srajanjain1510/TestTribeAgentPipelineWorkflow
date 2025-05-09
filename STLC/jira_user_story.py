@@ -1,13 +1,22 @@
+"""
+jira_user_story.py
+"""
 from typing import List, Optional
 from pydantic import BaseModel
 
 class JiraStory(BaseModel):
+    """
+    JiraStory is a Pydantic model that defines the schema for a JIRA user story.
+    """
     key: str
     summary: str
     description: Optional[str]
     acceptance_criteria: List[str]
 
     class Config:
+        """
+        Config is a Pydantic model configuration class that provides additional settings.
+        """
         schema_extra = {
             "example": {
                 "key": "PROJ-123",
