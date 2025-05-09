@@ -20,7 +20,8 @@ class JiraStory(BaseModel):
         schema_extra = {
             "example": {
                 "key": "PROJ-123",
-                "summary": "As a user, I want to reset my password so that I can regain access to my account.",
+                "summary": "As a user, I want to reset my password so that I can regain access "
+                           "to my account.",
                 "description": "This feature allows users to reset their passwords via email.",
                 "acceptance_criteria": [
                     "User can request a password reset link.",

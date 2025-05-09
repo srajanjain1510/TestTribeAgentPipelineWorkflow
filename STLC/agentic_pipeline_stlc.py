@@ -48,7 +48,8 @@ graph = StateGraph(state_schema=GraphState)
 # Define the start state
 def start(data: GraphState):
     """
-    Start state of the pipeline. This state initializes the pipeline and prepares for the next state.
+    Start state of the pipeline. This state initializes the pipeline and prepares
+    for the next state.
     :param data: The input data for the pipeline.
     :return: issue_key: The JIRA issue key.
     """
