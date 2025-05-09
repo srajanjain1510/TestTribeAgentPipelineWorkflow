@@ -3,6 +3,8 @@ jira_user_story.py
 """
 from typing import List, Optional
 from pydantic import BaseModel
+
+
 # pylint: disable=too-few-public-methods
 class JiraStory(BaseModel):
     """
