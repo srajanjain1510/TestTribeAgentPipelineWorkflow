@@ -117,6 +117,7 @@ def generate_cases(data: GraphState):
 
 graph.add_node("generate_test_cases", generate_cases)
 
+
 # Define the update_jira_with_test_cases state
 def update_jira(data: GraphState):
     issue_key = data.issue_key
